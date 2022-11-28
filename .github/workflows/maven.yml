@@ -25,7 +25,8 @@ jobs:
         cd ../../Slicer4J/Slicer4J
         mvn -DskipTests -B package install --file pom.xml
         mkdir artifacts
-        cp Slicer4J/target/slicer4j-jar-with-dependencies.jar artifacts/slicer4j-jar-with-dependencies.jar
+        echo "PWD: $(pwd)"
+        cp target/slicer4j-jar-with-dependencies.jar artifacts/slicer4j-jar-with-dependencies.jar
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
