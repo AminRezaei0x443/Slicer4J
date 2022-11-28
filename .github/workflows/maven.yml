@@ -1,13 +1,9 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Build
+name: Build Jar
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [workflow_dispatch]
 
 jobs:
   build:
@@ -28,3 +24,10 @@ jobs:
         mvn -DskipTests -B package install --file pom.xml
         cd ../../Slicer4J/Slicer4J
         mvn -DskipTests -B package install --file pom.xml
+        mkdir artifacts
+        cp Slicer4J/target/slicer4j-jar-with-dependencies.jar artifacts/slicer4j-jar-with-dependencies.jar
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Slicer4J Jar
+        path: artifacts
